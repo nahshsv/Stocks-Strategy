@@ -1,5 +1,6 @@
 {
-  "month": "",
+  "alerted_fraction": {},
   "allocated": {},
-  "last_alert_date": {}
+  "month": "2026-10",
+  "month_end_alerted": {}
 }
