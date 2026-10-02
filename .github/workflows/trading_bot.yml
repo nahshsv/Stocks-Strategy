@@ -1,0 +1,43 @@
+name: Trading Bot
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    # Every 30 minutes, 24/7.
+    # BTC is scanned 24/7.
+    # U.S. stocks are skipped outside regular NYSE hours by the Python code.
+    - cron: "*/30 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  trading:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Run trading bot
+        env:
+          TRADING_BOT_TOKEN: ${{ secrets.TRADING_BOT_TOKEN }}
+          TRADING_CHAT_ID: ${{ secrets.TRADING_CHAT_ID }}
+          TRADING_ACCOUNT_EQUITY: ${{ vars.TRADING_ACCOUNT_EQUITY }}
+        run: python trading_bot.py
+
+      - name: Persist trading state
+        run: |
+          if ! git diff --quiet state/trading_state.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add state/trading_state.json
+            git commit -m "Update trading signal state [skip ci]"
+            git push
+          fi

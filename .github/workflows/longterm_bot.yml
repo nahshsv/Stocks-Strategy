@@ -1,0 +1,42 @@
+name: Long-Term Bot
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    # Run near the end of the U.S. trading day.
+    # 19:45 UTC = 3:45 PM ET during daylight saving time.
+    # GitHub cron uses UTC, so this shifts by one hour during standard time.
+    - cron: "45 19 * * 1-5"
+
+permissions:
+  contents: write
+
+jobs:
+  longterm:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Run long-term bot
+        env:
+          LONGTERM_BOT_TOKEN: ${{ secrets.LONGTERM_BOT_TOKEN }}
+          LONGTERM_CHAT_ID: ${{ secrets.LONGTERM_CHAT_ID }}
+        run: python longterm_bot.py
+
+      - name: Persist long-term state
+        run: |
+          if ! git diff --quiet state/longterm_state.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add state/longterm_state.json
+            git commit -m "Update long-term signal state [skip ci]"
+            git push
+          fi

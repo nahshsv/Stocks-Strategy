@@ -1,0 +1,78 @@
+trading:
+  enabled: true
+
+  # 20 large/liquid U.S. stocks + Bitcoin
+  symbols:
+    stocks:
+      - AAPL
+      - MSFT
+      - NVDA
+      - AMZN
+      - GOOGL
+      - META
+      - AVGO
+      - TSLA
+      - BRK-B
+      - JPM
+      - WMT
+      - LLY
+      - V
+      - MA
+      - XOM
+      - COST
+      - ORCL
+      - NFLX
+      - AMD
+      - HD
+    crypto:
+      - BTC-USD
+
+  # Strategy inspired by your screenshots:
+  # RSI(14) crossing its own WMA(45), confirmed across M30/H1/H2.
+  timeframes: ["30m", "1h", "2h"]
+  rsi_period: 14
+  rsi_wma_period: 45
+
+  # Extra trend filter for quality.
+  daily_trend_filter: true
+  daily_sma_fast: 50
+  daily_sma_slow: 200
+
+  # U.S. stocks also need positive 20-day relative strength vs SPY.
+  stock_relative_strength_vs: "SPY"
+  stock_relative_strength_days: 20
+
+  # Risk controls
+  account_equity_default: 10000.0
+  max_trading_sleeve_pct: 0.10
+  risk_per_trade_pct: 0.003
+  max_positions: 3
+
+  stop:
+    atr_period: 14
+    atr_multiple: 1.5
+
+  # If true: U.S. stocks only scan 9:30-16:00 ET.
+  # BTC still scans 24/7.
+  stocks_only_during_market_hours: true
+
+longterm:
+  enabled: true
+  monthly_budget: 500.0
+
+  allocation:
+    VOO: 0.40
+    QQQ: 0.25
+    SCHD: 0.20
+    JEPQ: 0.15
+
+  # Percent change today <= threshold
+  red_day_ladder:
+    - threshold: -0.005
+      deploy_fraction: 0.25
+    - threshold: -0.010
+      deploy_fraction: 0.50
+    - threshold: -0.020
+      deploy_fraction: 1.00
+
+  force_buy_last_trading_days: 3
