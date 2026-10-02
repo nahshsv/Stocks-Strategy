@@ -12,18 +12,18 @@ trading:
       - META
       - AVGO
       - TSLA
-      - BRK-B
-      - JPM
+      - UBER
+      - HIMS
       - WMT
-      - LLY
-      - V
-      - MA
-      - XOM
+      - MU
+      - CRDO
+      - RIOT
+      - SNDK
       - COST
       - ORCL
       - NFLX
       - AMD
-      - HD
+      - HPE
     crypto:
       - BTC-USD
 
