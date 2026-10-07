@@ -1,5 +1,7 @@
 {
-  "alerted_fraction": {},
+  "alerted_fraction": {
+    "SCHD": 0.25
+  },
   "allocated": {},
   "month": "2026-10",
   "month_end_alerted": {}
