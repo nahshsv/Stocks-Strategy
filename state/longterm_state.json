@@ -1,5 +1,7 @@
 {
   "alerted_fraction": {
+    "JEPQ": 0.25,
+    "QQQ": 0.5,
     "SCHD": 0.25
   },
   "allocated": {},
