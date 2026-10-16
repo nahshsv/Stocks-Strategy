@@ -1,7 +1,7 @@
 {
   "alerted_fraction": {
-    "JEPQ": 0.5,
-    "QQQ": 0.5,
+    "JEPQ": 1.0,
+    "QQQ": 1.0,
     "SCHD": 0.25,
     "VOO": 0.5
   },
