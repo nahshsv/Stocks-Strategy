@@ -7,5 +7,10 @@
   },
   "allocated": {},
   "month": "2026-10",
-  "month_end_alerted": {}
+  "month_end_alerted": {
+    "JEPQ": true,
+    "QQQ": true,
+    "SCHD": true,
+    "VOO": true
+  }
 }
