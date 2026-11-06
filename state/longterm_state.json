@@ -2,8 +2,8 @@
   "alerted_fraction": {
     "JEPQ": 1.0,
     "QQQ": 1.0,
-    "SCHD": 0.25,
-    "VOO": 0.5
+    "SCHD": 1.0,
+    "VOO": 1.0
   },
   "allocated": {},
   "month": "2026-11",
